@@ -1,0 +1,88 @@
+﻿@using System.Timers
+
+<CascadingValue Value="this">
+    <div class="diashow" @onmouseenter="PauseTimer" @onmouseleave="ResumeTimer" style="user-select:none;">
+        @ChildContent
+
+        @if (Items.Count > 0)
+        {
+            <div class="diashow-item">
+                @Items[CurrentIndex].ChildContent
+            </div>
+
+            <div class="diashow-controls">
+                <button @onclick="Prev">Prev</button>
+                <button @onclick="Next">Next</button>
+            </div>
+        }
+    </div>
+</CascadingValue>
+
+@code {
+    [Parameter, EditorRequired]
+    public RenderFragment ChildContent { get; set; } = null!;
+
+    internal List<DiashowItem> Items { get; set; } = new();
+    private int CurrentIndex = 0;
+    private Timer? _timer;
+
+    [Parameter]
+    public int Interval { get; set; } = 500; // ms between auto slides
+
+    internal void RegisterItem(DiashowItem item)
+    {
+        Items.Add(item);
+        StateHasChanged();
+    }
+
+    private void Next()
+    {
+        if (Items.Count == 0) return;
+        CurrentIndex = (CurrentIndex + 1) % Items.Count;
+        InvokeAsync(StateHasChanged);
+        ResetTimer();
+    }
+
+    private void Prev()
+    {
+        if (Items.Count == 0) return;
+        CurrentIndex = (CurrentIndex - 1 + Items.Count) % Items.Count;
+        StateHasChanged();
+        ResetTimer();
+    }
+
+    private void ResetTimer()
+    {
+        if (_timer is null) return;
+
+        _timer.Stop();
+        _timer.Start();
+    }
+
+    private void PauseTimer()
+    {
+        _timer?.Stop();
+    }
+
+    private void ResumeTimer()
+    {
+        _timer?.Start();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _timer = new Timer(Interval);
+            _timer.Elapsed += (s, e) => Next();
+            _timer.AutoReset = true;
+            _timer.Start();
+        }
+    }
+
+    public void Dispose()
+    {
+        _timer?.Stop();
+        _timer?.Dispose();
+    }
+}
