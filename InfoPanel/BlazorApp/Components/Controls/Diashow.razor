@@ -1,21 +1,31 @@
 ﻿@using System.Timers
 
 <CascadingValue Value="this">
-    <div class="diashow" @onmouseenter="PauseTimer" @onmouseleave="ResumeTimer" style="user-select:none;">
+    <div class="diashow position-fixed top-0 start-0 vw-100 vh-100 overflow-hidden bg-black"
+         @onmouseenter="PauseTimer" @onmouseleave="ResumeTimer" style="user-select:none;">
+
         @ChildContent
 
         @if (Items.Count > 0)
         {
-            <div class="diashow-item">
+            <div class="diashow-item h-100 d-flex justify-content-center align-items-center">
                 @Items[CurrentIndex].ChildContent
             </div>
 
-            <div class="diashow-controls">
-                <button @onclick="Prev">Prev</button>
-                <button @onclick="Next">Next</button>
+            <div class="position-absolute top-50 start-0 end-0 d-flex justify-content-between px-3 translate-middle-y" style="z-index:2147483647;">
+                <button class="btn btn-outline-light rounded-circle opacity-75 shadow-sm btn-lg" @onclick="Prev"
+                        style="width: 3.5rem; height: 3.5rem; line-height: 1;">
+                    &lt;
+                </button>
+                <button class="btn btn-outline-light rounded-circle opacity-75 shadow-sm btn-lg" @onclick="Next"
+                        style="width: 3.5rem; height: 3.5rem; line-height: 1;">
+                    &gt;
+                </button>
             </div>
+
         }
     </div>
+
 </CascadingValue>
 
 @code {
@@ -27,7 +37,7 @@
     private Timer? _timer;
 
     [Parameter]
-    public int Interval { get; set; } = 500; // ms between auto slides
+    public int Interval { get; set; } = 3000; // ms between auto slides
 
     internal void RegisterItem(DiashowItem item)
     {
@@ -62,11 +72,14 @@
     private void PauseTimer()
     {
         _timer?.Stop();
+        Console.WriteLine("PauseTimer");
     }
 
     private void ResumeTimer()
     {
         _timer?.Start();
+        Console.WriteLine("ResumeTimer");
+
     }
 
     protected override void OnAfterRender(bool firstRender)
