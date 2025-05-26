@@ -2,167 +2,45 @@
 
 <CascadingValue Value="this">
     <div class="diashow position-fixed top-0 start-0 vw-100 vh-100 overflow-hidden bg-black"
-         @onmouseenter="FreezeOnHover ? OnMouseEnter : null"
-         @onmouseleave="FreezeOnHover ? OnMouseLeave : null"
-         style="user-select:none;">
-
-        @if (Items.Count > 0)
+         @onmouseenter="(FreezeOnHover ? OnMouseEnter : null)"
+         @onmouseleave="(FreezeOnHover ? OnMouseLeave : null)"
+         style="user-select: none;">
+        @ChildContent
+        @if (Items.Count > 1)
         {
             <div class="diashow-item h-100 d-flex flex-column justify-content-center align-items-center">
                 <div class="flex-grow-1 d-flex justify-content-center align-items-center" style="width: 100%;">
-                    @Items[CurrentIndex].ChildContent
+                    @Items[ItemIndex].ChildContent
                 </div>
 
-                @if (DisplayProgress)
+                @if (DisplayProgressBar)
                 {
-                    <div style="width: 100%; height: 10px;">
-                        <div class="progress" style="height: 10px;">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
+                    <div class="w-100" style="height: 4px;">
+                        <div class="rounded-0 overflow-hidden" style="height: 100%; background-color: transparent;">
+                            <div class="bg-secondary rounded-0"
                                  role="progressbar"
-                                 style="width:@ProgressPercentage%; transition: width 50ms linear;"
+                                 style="width: @ProgressPercentage%; transition: width @(TickIntervalMs)ms linear; height: 100%;"
                                  aria-valuemin="0" aria-valuemax="100" aria-valuenow="@ProgressPercentage">
                             </div>
                         </div>
                     </div>
+
                 }
             </div>
 
-
-            <div class="position-absolute top-50 start-0 end-0 d-flex justify-content-between px-3 translate-middle-y" style="z-index:2147483647;">
-                <button class="btn btn-outline-light rounded-circle opacity-75 shadow-sm btn-lg" @onclick="Prev" style="width:3.5rem; height:3.5rem;">&lt;</button>
-                <button class="btn btn-outline-light rounded-circle opacity-75 shadow-sm btn-lg" @onclick="Next" style="width:3.5rem; height:3.5rem;">&gt;</button>
-            </div>
+            @if (DisplayNavButtons)
+            {
+                <div class="position-absolute top-50 start-0 end-0 d-flex justify-content-between px-3 translate-middle-y" style="z-index: 2147483647;">
+                    <button class="btn btn-outline-light rounded-circle opacity-75 shadow-sm btn-lg" @onclick="Prev" style="width: 3.5rem; height: 3.5rem;">&lt;</button>
+                    <button class="btn btn-outline-light rounded-circle opacity-75 shadow-sm btn-lg" @onclick="Next" style="width: 3.5rem; height: 3.5rem;">&gt;</button>
+                </div>
+            }
         }
-        else
+        else if (Items.Count == 1)
         {
-            @ChildContent
+            <div class="diashow-item h-100 d-flex justify-content-center align-items-center">
+                @Items[0].ChildContent
+            </div>
         }
     </div>
 </CascadingValue>
-
-@code {
-    [Parameter, EditorRequired] public RenderFragment ChildContent { get; set; } = null!;
-    [Parameter] public bool FreezeOnHover { get; set; }
-    [Parameter] public bool DisplayProgress { get; set; }
-    [Parameter] public int Interval { get; set; } = 3000;
-
-    internal List<DiashowItem> Items { get; } = new();
-    private int CurrentIndex = 0;
-    private Timer? _slideTimer;
-    private Timer? _progressTimer;
-    private double elapsedMs = 0;
-    private bool _isHovered = false;
-
-    private int ProgressPercentage => DisplayProgress ? (int)(elapsedMs / Interval * 100) : 0;
-
-    internal void RegisterItem(DiashowItem item)
-    {
-        Items.Add(item);
-        StateHasChanged();
-    }
-
-    private void Next()
-    {
-        if (Items.Count == 0) return;
-        CurrentIndex = (CurrentIndex + 1) % Items.Count;
-        ResetTimers();
-        StateHasChanged();
-    }
-
-    private void Prev()
-    {
-        if (Items.Count == 0) return;
-        CurrentIndex = (CurrentIndex - 1 + Items.Count) % Items.Count;
-        ResetTimers();
-        StateHasChanged();
-    }
-
-    private void ResetTimers()
-    {
-        elapsedMs = 0;
-
-        if (_slideTimer is null) return;
-
-        _slideTimer.Stop();
-        if (DisplayProgress) _progressTimer?.Stop();
-
-        if (!(_isHovered && FreezeOnHover))
-        {
-            _slideTimer.Start();
-            if (DisplayProgress) _progressTimer?.Start();
-        }
-
-        StateHasChanged();
-    }
-
-    private void OnMouseEnter()
-    {
-        _isHovered = true;
-        if (FreezeOnHover)
-            PauseTimers();
-    }
-
-    private void OnMouseLeave()
-    {
-        _isHovered = false;
-        if (FreezeOnHover)
-            ResumeTimers();
-    }
-
-    private void PauseTimers()
-    {
-        _slideTimer?.Stop();
-        if (DisplayProgress) _progressTimer?.Stop();
-        elapsedMs = 0;
-        StateHasChanged();
-    }
-
-    private void ResumeTimers()
-    {
-        if (!FreezeOnHover) return;
-        _slideTimer?.Start();
-        if (DisplayProgress) _progressTimer?.Start();
-    }
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-        if (!firstRender) return;
-
-        _slideTimer = new Timer(Interval);
-        _slideTimer.Elapsed += async (_, _) =>
-        {
-            await InvokeAsync(() =>
-            {
-                Next();
-                elapsedMs = 0;
-                StateHasChanged();
-            });
-        };
-        _slideTimer.AutoReset = true;
-        _slideTimer.Start();
-
-        if (DisplayProgress)
-        {
-            _progressTimer = new Timer(50);
-            _progressTimer.Elapsed += async (_, _) =>
-            {
-                await InvokeAsync(() =>
-                {
-                    elapsedMs += 50;
-                    if (elapsedMs > Interval) elapsedMs = Interval;
-                    StateHasChanged();
-                });
-            };
-            _progressTimer.AutoReset = true;
-            _progressTimer.Start();
-        }
-    }
-
-    public void Dispose()
-    {
-        _slideTimer?.Stop();
-        _slideTimer?.Dispose();
-        _progressTimer?.Stop();
-        _progressTimer?.Dispose();
-    }
-}

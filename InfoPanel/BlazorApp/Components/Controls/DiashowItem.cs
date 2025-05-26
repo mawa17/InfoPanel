@@ -8,6 +8,6 @@ public sealed class DiashowItem : ComponentBase
     [CascadingParameter] public Diashow? Parent { get; set; }
     protected override void OnInitialized()
     {
-        Parent?.RegisterItem(this);
+        Parent?.Register(this);
     }
 }
