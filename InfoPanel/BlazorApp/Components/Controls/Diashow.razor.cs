@@ -26,7 +26,7 @@ public partial class Diashow : IDisposable
         Items.Add(item);
         StateHasChanged();
     }
-
+    
     private void Next()
     {
         if (Items.Count == 0) return;

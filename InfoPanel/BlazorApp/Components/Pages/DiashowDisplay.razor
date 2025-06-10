@@ -1,16 +1,19 @@
 ﻿@rendermode InteractiveServer
 
 <Diashow DisplayProgressBar DisplayNavButtons FreezeOnHover >
-    <DiashowItem>
+@*     <DiashowItem>
         <div style="background-color: blueviolet; padding: 20px;">
             <h2>Slide 1</h2>
             <p>This is the third slide.</p>
         </div>
+    </DiashowItem> *@
+    <DiashowItem>
+        <img src="./keys.png" class="w-100 vh-100 object-fit-cover">
     </DiashowItem>
     <DiashowItem>
-        <div style="background-color: red; padding: 20px;">
-            <h2>Slide 2</h2>
-            <p>This is the third slide.</p>
-        </div>
+        <iframe src="https://gnist.show/" style="height:100vh;width:100vw;"></iframe>
+    </DiashowItem>
+    <DiashowItem>
+        <iframe src="https://www.rejseplanen.dk/webapp/?#!p|tp!histid|0!histkey|h284185" style="height:100vh;width:100vw;"></iframe>
     </DiashowItem>
 </Diashow>
