@@ -19,14 +19,19 @@ public partial class Diashow : IDisposable
     private bool IsHovered = false;
 
     private byte ProgressPercentage =>
-         (byte)(DisplayProgressBar ? Math.Clamp(ElapsedMs / (IntervalMs-TickIntervalMs) * 100, 0, 100) : 0);
+        (byte)(DisplayProgressBar ? Math.Clamp(ElapsedMs / (IntervalMs - TickIntervalMs) * 100, 0, 100) : 0);
 
     internal void Register(DiashowItem item)
     {
         Items.Add(item);
         StateHasChanged();
     }
-    
+
+    private bool IsDarkMode =>
+        Items.Count > 0 && ItemIndex >= 0 && ItemIndex < Items.Count
+            ? !Items[ItemIndex].LightMode
+            : true;
+
     private void Next()
     {
         if (Items.Count == 0) return;
@@ -48,7 +53,7 @@ public partial class Diashow : IDisposable
         SlideTimer?.Stop();
         ProgressTimer?.Stop();
 
-        if (!(IsHovered && FreezeOnHover))
+        if (!IsHovered || !FreezeOnHover)
         {
             SlideTimer?.Start();
             if (DisplayProgressBar) ProgressTimer?.Start();
@@ -60,41 +65,35 @@ public partial class Diashow : IDisposable
     private void OnMouseEnter()
     {
         IsHovered = true;
-        if (FreezeOnHover) PauseTimers();
+        if (FreezeOnHover)
+        {
+            ResetTimers();
+        }
     }
 
     private void OnMouseLeave()
     {
         IsHovered = false;
-        if (FreezeOnHover) ResumeTimers();
-    }
-
-    private void PauseTimers()
-    {
-        SlideTimer?.Stop();
-        ProgressTimer?.Stop();
-        ElapsedMs = 0;
-        StateHasChanged();
-    }
-
-    private void ResumeTimers()
-    {
-        if (!FreezeOnHover) return;
-        SlideTimer?.Start();
-        if (DisplayProgressBar) ProgressTimer?.Start();
+        if (FreezeOnHover)
+        {
+            ResetTimers();
+        }
     }
 
     protected override void OnAfterRender(bool firstRender)
     {
         if (!firstRender || Items.Count <= 1) return;
 
-        SlideTimer = new(IntervalMs);
+        SlideTimer = new Timer(IntervalMs);
         SlideTimer.Elapsed += (_, _) =>
         {
             InvokeAsync(() =>
             {
-                Next();
-                ElapsedMs = 0;
+                if (!IsHovered || !FreezeOnHover)
+                {
+                    Next();
+                    ElapsedMs = 0;
+                }
             });
         };
         SlideTimer.AutoReset = true;
@@ -107,8 +106,11 @@ public partial class Diashow : IDisposable
             {
                 InvokeAsync(() =>
                 {
-                    ElapsedMs = Math.Clamp(ElapsedMs + TickIntervalMs, 0, IntervalMs);
-                    StateHasChanged();
+                    if (!IsHovered || !FreezeOnHover)
+                    {
+                        ElapsedMs = Math.Clamp(ElapsedMs + TickIntervalMs, 0, IntervalMs);
+                        StateHasChanged();
+                    }
                 });
             };
             ProgressTimer.AutoReset = true;
