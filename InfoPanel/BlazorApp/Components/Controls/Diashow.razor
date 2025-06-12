@@ -1,38 +1,47 @@
 ﻿@using System.Timers
 
 <CascadingValue Value="this">
-    <div class="diashow position-fixed top-0 start-0 vw-100 vh-100 overflow-hidden bg-black"
+    <div class="diashow position-fixed top-0 start-0 vw-100 vh-100 overflow-hidden"
+         style="user-select: none; background-color:@(IsDarkMode ? "black" : "white")"
          @onmouseenter="(FreezeOnHover ? OnMouseEnter : null)"
-         @onmouseleave="(FreezeOnHover ? OnMouseLeave : null)"
-         style="user-select: none;">
+         @onmouseleave="(FreezeOnHover ? OnMouseLeave : null)">
+
         @ChildContent
+
         @if (Items.Count > 1)
         {
-            <div class="diashow-item h-100 d-flex flex-column justify-content-center align-items-center">
-                <div class="flex-grow-1 d-flex justify-content-center align-items-center" style="width: 100%;">
+            <div class="diashow-item h-100 d-flex justify-content-center align-items-center">
+                <div class="d-flex justify-content-center align-items-center flex-grow-1" style="width: 100%;">
                     @Items[ItemIndex].ChildContent
                 </div>
+            </div>
 
-                @if (DisplayProgressBar)
-                {
-                    <div class="w-100" style="height: 4px;">
-                        <div class="rounded-0 overflow-hidden" style="height: 100%; background-color: transparent;">
-                            <div class="bg-secondary rounded-0"
-                                 role="progressbar"
-                                 style="width: @ProgressPercentage%; transition: width @(TickIntervalMs)ms linear; height: 100%;"
-                                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="@ProgressPercentage">
-                            </div>
+            @if (DisplayProgressBar)
+            {
+                <div class="position-fixed bottom-0 start-0 end-0"
+                     style="height: 4px; z-index: 2147483647; pointer-events: none;">
+                    <div class="w-100 h-100 rounded-0 overflow-hidden" style="background-color: transparent;">
+                        <div role="progressbar"
+                             class="h-100 rounded-0"
+                             style="width: @ProgressPercentage%; transition: width @(TickIntervalMs)ms linear; background-color:@(IsDarkMode ? "black" : "white")"
+                             aria-valuemin="0" aria-valuemax="100" aria-valuenow="@ProgressPercentage">
                         </div>
                     </div>
-
-                }
-            </div>
+                </div>
+            }
 
             @if (DisplayNavButtons)
             {
-                <div class="position-absolute top-50 start-0 end-0 d-flex justify-content-between px-3 translate-middle-y" style="z-index: 2147483647;">
-                    <button class="btn btn-outline-light rounded-circle opacity-75 shadow-sm btn-lg" @onclick="Prev" style="width: 3.5rem; height: 3.5rem;">&lt;</button>
-                    <button class="btn btn-outline-light rounded-circle opacity-75 shadow-sm btn-lg" @onclick="Next" style="width: 3.5rem; height: 3.5rem;">&gt;</button>
+                <div class="position-absolute top-50 start-0 end-0 d-flex justify-content-between px-3 translate-middle-y"
+                     style="z-index: 2147483646;">
+                    <button class="btn rounded-circle opacity-75 shadow-sm btn-lg @(IsDarkMode ? "btn-outline-dark" : "btn-outline-light")"
+                            @onclick="Prev" style="width: 3.5rem; height: 3.5rem;">
+                        &lt;
+                    </button>
+                    <button class="btn rounded-circle opacity-75 shadow-sm btn-lg @(IsDarkMode ? "btn-outline-dark" : "btn-outline-light")"
+                            @onclick="Next" style="width: 3.5rem; height: 3.5rem;">
+                        &gt;
+                    </button>
                 </div>
             }
         }

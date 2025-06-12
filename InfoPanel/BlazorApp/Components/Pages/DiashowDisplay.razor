@@ -1,12 +1,7 @@
 ﻿@rendermode InteractiveServer
 
-<Diashow DisplayProgressBar DisplayNavButtons FreezeOnHover >
-@*     <DiashowItem>
-        <div style="background-color: blueviolet; padding: 20px;">
-            <h2>Slide 1</h2>
-            <p>This is the third slide.</p>
-        </div>
-    </DiashowItem> *@
+<Diashow IntervalMs="5000" DisplayProgressBar DisplayNavButtons FreezeOnHover >
+
     <DiashowItem>
         <img src="./keys.png" class="w-100 vh-100 object-fit-cover">
     </DiashowItem>
@@ -15,5 +10,8 @@
     </DiashowItem>
     <DiashowItem>
         <iframe src="https://www.rejseplanen.dk/webapp/?#!p|tp!histid|0!histkey|h284185" style="height:100vh;width:100vw;"></iframe>
+    </DiashowItem>
+    <DiashowItem LightMode>
+        <iframe src="https://infinitynet.dk" style="height:100vh;width:100vw;"></iframe>
     </DiashowItem>
 </Diashow>
