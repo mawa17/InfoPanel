@@ -1,24 +1,24 @@
 {
   "DepartureBoardSettings": [
     {
-      "StationId": "000003662",
-      "StationName": "Telegrafvej Vestbuen",
-      "MaxItemsToShow": 15,
+      "StationId": 8600764,
+      "StationName": "Friheden St",
+      "MaxItemsToShow": 20,
       "RefreshApiIntervalMinutes": 3
     },
     {
-      "StationId": 8600708,
-      "StationName": "Ballerup St. Bus",
+      "StationId": 46788,
+      "StationName": "Hammerholmen (Stamholmen)",
       "MaxItemsToShow": 20,
       "RefreshApiIntervalMinutes": 3,
       "TransportType": 1
     },
     {
-      "StationId": 8600708,
-      "StationName": "Ballerup St. Tog",
+      "StationId": 3849,
+      "StationName": "CPH Business Park (Avedøre Havnevej)",
       "MaxItemsToShow": 20,
       "RefreshApiIntervalMinutes": 3,
-      "TransportType": 0
+      "TransportType": 1
     }
   ]
 }
