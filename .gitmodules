@@ -1,0 +1,4 @@
+[submodule "submodules/rejseplanenapi"]
+	path = submodules/rejseplanenapi
+	url = https://github.com/TEC-SOP-Data/rejseplanenapi.git
+	branch = API-2.0
