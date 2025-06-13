@@ -1,0 +1,24 @@
+{
+  "DepartureBoardSettings": [
+    {
+      "StationId": "000003662",
+      "StationName": "Telegrafvej Vestbuen",
+      "MaxItemsToShow": 15,
+      "RefreshApiIntervalMinutes": 3
+    },
+    {
+      "StationId": 8600708,
+      "StationName": "Ballerup St. Bus",
+      "MaxItemsToShow": 20,
+      "RefreshApiIntervalMinutes": 3,
+      "TransportType": 1
+    },
+    {
+      "StationId": 8600708,
+      "StationName": "Ballerup St. Tog",
+      "MaxItemsToShow": 20,
+      "RefreshApiIntervalMinutes": 3,
+      "TransportType": 0
+    }
+  ]
+}

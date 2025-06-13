@@ -5,6 +5,10 @@ VisualStudioVersion = 17.13.35919.96
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorApp", "BlazorApp\BlazorApp.csproj", "{03DB70DA-1682-47BC-9D90-BD6CD5B4B4CC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "vendor", "vendor", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RejseplanWebsite", "..\submodules\rejseplanenapi\Blazor\RejseplanWebsite\RejseplanWebsite.csproj", "{6DEFBA2A-2031-2FFE-D1CB-8873483FB2F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{03DB70DA-1682-47BC-9D90-BD6CD5B4B4CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03DB70DA-1682-47BC-9D90-BD6CD5B4B4CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03DB70DA-1682-47BC-9D90-BD6CD5B4B4CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DEFBA2A-2031-2FFE-D1CB-8873483FB2F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DEFBA2A-2031-2FFE-D1CB-8873483FB2F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DEFBA2A-2031-2FFE-D1CB-8873483FB2F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DEFBA2A-2031-2FFE-D1CB-8873483FB2F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6DEFBA2A-2031-2FFE-D1CB-8873483FB2F7} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D9C675B0-04A6-4C6D-BDA4-DF1349FB55FF}
