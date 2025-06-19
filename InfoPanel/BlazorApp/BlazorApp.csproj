@@ -4,7 +4,14 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <UserSecretsId>607271d6-470b-4bbe-a693-e95be3f240cf</UserSecretsId>
+    <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\submodules\rejseplanenapi\Blazor\RejseplanWebsite\RejseplanWebsite.csproj" />
