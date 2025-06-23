@@ -3,28 +3,24 @@
     border-radius: 0.75rem;
     padding: 2rem;
     background-color: #10101080;
-    color: white;
     overflow: hidden;
-    z-index: 0;
 }
 
 div.info-column::before {
     content: '';
     position: absolute;
     inset: 0;
-    padding: 0.25rem;
+    padding: 0.1rem;
     background: linear-gradient(135deg, #2e8b5780, #00699480);
     border-radius: inherit;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
-    z-index: -1;
-    pointer-events: none;
 }
 
 div.info-column hr {
     border: none;
-    height: 0.2rem;
+    height: 0.15rem;
     background: linear-gradient(135deg, #2e8b57FF, #006994FF);
     margin-top: 0.5rem;
     margin-bottom: 1rem;

@@ -1,27 +1,19 @@
 ﻿@rendermode InteractiveServer
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 <div class="w-100 h-75">
     <div class="container h-100 p-0">
         <div class="row h-100 g-4">
-
-            <div class="col-12">
-                <h6 class="display-6 fs-1 text-white text-center">
-                    <b>Informationer</b>
-                </h6>
-            </div>
-
+            <div class="col-12"><h6 class="display-6 fs-1 text-white text-opacity-75 text-center">Informationer</h6></div>
             @foreach (var item in Items)
             {
                 <div class="col-@item.ColoumWidth">
                     <div class="info-column w-100 h-100">
-                        <div class="info-column-title">@item.Title</div>
-                        <hr />
+                        <div class="info-column-title">@item.Title</div><hr />
                         <div class="info-column-text">@item.Content</div>
                     </div>
                 </div>
             }
-
         </div>
     </div>
 </div>
-

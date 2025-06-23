@@ -1,6 +1,6 @@
 ﻿@rendermode InteractiveServer
 
-<Diashow IntervalMs="5000" DisplayProgressBar DisplayNavButtons FreezeOnHover >
+<Diashow IntervalMs="60000" DisplayProgressBar DisplayNavButtons FreezeOnHover >
     <!--
     <DiashowItem>
         <RejseplanWebsite.Pages.Index />
@@ -16,6 +16,20 @@
             new(5,"Facebook.com","Har I spørgsmål til uddannelsen eller vil I gerne følge med i, hvad der sker på skolen (events, konkurrencer m.v.)? Klik ind på www.facebook.com/TECDK")
         })"/>
     </DiashowItem>
+    @*
+    <DiashowItem>
+        <InfoGuide Items="@(new InfoGuideModel[] {
+            new(6,"Fravær ved hovedforløb",""),
+            new(6,"Fravær ved skoleoplæring","")
+        })"/>
+    </DiashowItem>
+    <DiashowItem>
+        <InfoGuide Items="@(new InfoGuideModel[] {
+            new(8,"Sommer afslutning","d. 3 Juli"),
+            new(4,"Mulighedernes dag","d. 28 August")
+        })"/>
+    </DiashowItem>
+    *@
     @*
     <DiashowItem>
         <img src="./keys.png" class="w-100 vh-100 object-fit-cover">
