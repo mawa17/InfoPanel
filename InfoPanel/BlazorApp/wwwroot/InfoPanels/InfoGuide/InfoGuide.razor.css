@@ -1,0 +1,38 @@
+﻿.info-column {
+    position: relative;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    background-color: #101010;
+    color: white;
+    overflow: hidden;
+    z-index: 0;
+}
+
+    .info-column::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        padding: 2px;
+        background: linear-gradient(135deg, #2e8b5780, #00699480);
+        border-radius: inherit;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        z-index: -1;
+        pointer-events: none;
+    }
+
+.info-column-title {
+    font-size: 1.25rem;
+    font-weight: 400;
+    font-family: Arial, sans-serif;
+    color: rgba(255, 255, 255, 0.75);
+    letter-spacing: 0.1rem;
+}
+
+.info-column-text {
+    font-size: 1rem;
+    font-weight: 200;
+    font-family: Arial, sans-serif;
+    color: rgba(255, 255, 255, 0.5);
+}
