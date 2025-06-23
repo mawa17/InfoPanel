@@ -1,9 +1,22 @@
 ﻿@rendermode InteractiveServer
 
 <Diashow IntervalMs="5000" DisplayProgressBar DisplayNavButtons FreezeOnHover >
+    <!--
     <DiashowItem>
         <RejseplanWebsite.Pages.Index />
     </DiashowItem>
+    -->
+    <DiashowItem>
+        <InfoGuide Items="@(new InfoGuideModel[] {
+            new(7,"Befordring for elev","Når du som elev er på skoleophold, er du berettiget til befordringsgodtgørelse, hvis der er mere end 10 km hver vej fra bopæl til skole. Befordringsgodtgørelsen bliver beregnet automatisk og udbetales til arbejdsgiver af AUB. Beløbet bliver indberettet efter endt skoleophold. Det er arbejdsgiver, der udbetaler befordringsgodtgørelsen."),
+            new(5,"Fravær","Ved sygdom eller andet fravær skal du som elev hver dag give besked til skolen inden kl. 7:45 direkte i Studie+ under skema, enten via hjemmesiden www.studieplus.dk eller Studie+ App ́en. Husk altid at informere arbejdsgiver om fravær."),
+            new(5,"Skolehjem for elev","Hvis der ønskes indlogering på skolehjem, bedes du kontakte skolen senest en uge efter modtagelsen af denne indkaldelse. Derefter vil skolehjemmet tage kontakt."),
+            new(7,"Lærepladsen.dk","På www.laerepladsen.dk findes der oplysninger om lærepladsforhold, planlagte skoleophold og fravær."),
+            new(7,"Studie+","På www.studieplus.dk findes der oplysninger om planlagte skoleophold, karakterer og fravær. Eleven kan logge på Studie+ med MitID."),
+            new(5,"Facebook.com","Har I spørgsmål til uddannelsen eller vil I gerne følge med i, hvad der sker på skolen (events, konkurrencer m.v.)? Klik ind på www.facebook.com/TECDK")
+        })"/>
+    </DiashowItem>
+    @*
     <DiashowItem>
         <img src="./keys.png" class="w-100 vh-100 object-fit-cover">
     </DiashowItem>
@@ -13,4 +26,5 @@
     <DiashowItem>
         <iframe src="https://www.rejseplanen.dk/webapp/?#!p|tp!histid|0!histkey|h284185" style="height:100vh;width:100vw;"></iframe>
     </DiashowItem>
+    *@
 </Diashow>

@@ -1,0 +1,47 @@
+﻿.info-column {
+    position: relative;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    background-color: #10101080;
+    color: white;
+    overflow: hidden;
+    z-index: 0;
+}
+
+div.info-column::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 0.25rem;
+    background: linear-gradient(135deg, #2e8b5780, #00699480);
+    border-radius: inherit;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    z-index: -1;
+    pointer-events: none;
+}
+
+div.info-column hr {
+    border: none;
+    height: 0.2rem;
+    background: linear-gradient(135deg, #2e8b57FF, #006994FF);
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.info-column-title {
+    font-size: 1.25rem;
+    font-weight: 400;
+    font-family: Arial, sans-serif;
+    color: rgba(255, 255, 255, 0.75);
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+}
+
+.info-column-text {
+    font-size: 1rem;
+    font-weight: 200;
+    font-family: Arial, sans-serif;
+    color: rgba(255, 255, 255, 0.5);
+}

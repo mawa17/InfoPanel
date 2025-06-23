@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.InjectBuilder();
+//  builder.InjectBuilder();
 
 var app = builder.Build();
 
