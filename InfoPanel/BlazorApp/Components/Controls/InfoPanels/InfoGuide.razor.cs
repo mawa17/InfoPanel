@@ -4,7 +4,20 @@ namespace BlazorApp.Components.Controls.InfoPanels;
 public partial class InfoGuide
 {
     [EditorRequired, Parameter]
-    public InfoGuideModel[] Items { get; set; }
+    public List<Column> Columns { get; set; }
 }
 
-public sealed record InfoGuideModel(byte ColoumWidth, string Title, string Content);
+public sealed record Column
+{
+    public Column() { }
+    public Column(int width, string title, string text)
+    {
+        Width = width;
+        Title = title;
+        Text = text;
+    }
+
+    public int Width { get; set; }
+    public string Title { get; set; } = string.Empty;
+    public string Text { get; set; } = string.Empty;
+}

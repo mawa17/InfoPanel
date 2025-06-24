@@ -1,7 +1,7 @@
-﻿.info-column {
+﻿div.info-column {
     position: relative;
-    border-radius: 0.75rem;
-    padding: 2rem;
+    border-radius: 0.5rem;
+    padding: 1.5rem 3rem;
     background-color: #10101080;
     overflow: hidden;
 }
@@ -18,15 +18,8 @@ div.info-column::before {
     mask-composite: exclude;
 }
 
-div.info-column hr {
-    border: none;
-    height: 0.15rem;
-    background: linear-gradient(135deg, #2e8b57FF, #006994FF);
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-.info-column-title {
+div.info-column-title {
+    padding-bottom: 0.5rem;
     font-size: 1.25rem;
     font-weight: 400;
     font-family: Arial, sans-serif;
@@ -35,7 +28,7 @@ div.info-column hr {
     text-transform: uppercase;
 }
 
-.info-column-text {
+div.info-column-text {
     font-size: 1rem;
     font-weight: 200;
     font-family: Arial, sans-serif;
