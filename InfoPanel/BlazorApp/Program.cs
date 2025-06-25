@@ -1,4 +1,5 @@
 using BlazorApp.Components;
+using Microsoft.AspNetCore.Components;
 using RejseplanWebsite;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,7 +8,33 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+
 builder.InjectConfig();
+
+// Register IHttpContextAccessor
+builder.Services.AddHttpContextAccessor();
+
+// Named HttpClient with dynamic BaseAddress and optional cert bypass (DEV only)
+builder.Services.AddHttpClient("Default", (serviceProvider, client) =>
+{
+    var httpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
+    var request = httpContextAccessor.HttpContext?.Request;
+
+    if (request == null)
+        throw new InvalidOperationException("HttpContext is not available during HttpClient configuration.");
+
+    // Dynamically set base address with correct scheme
+    client.BaseAddress = new Uri($"{request.Scheme}://{request.Host}/");
+}).ConfigurePrimaryHttpMessageHandler(() =>
+new HttpClientHandler
+{
+    // Bypass cert validation
+    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+});
+
+
+// Register default HttpClient for DI
+builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("Default"));
 
 var app = builder.Build();
 

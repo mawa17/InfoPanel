@@ -1,4 +1,5 @@
-﻿@rendermode InteractiveServer
+﻿@inject HttpClient Http
+@rendermode InteractiveServer
 
 
 <Diashow IntervalMs="5000" DisplayProgressBar DisplayNavButtons FreezeOnHover >
@@ -79,11 +80,39 @@
     <DiashowItem>
         <img src="./keys.png" class="w-100 vh-100 object-fit-cover">
     </DiashowItem>
+    @if (staticHtmlContent is default(MarkupString[]))
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        foreach (var htmlContent in staticHtmlContent)
+        {
+            <DiashowItem>@htmlContent</DiashowItem>
+        }
+    }
     <DiashowItem>
         <iframe src="https://gnist.show/" style="height:100vh;width:100vw;"></iframe>
     </DiashowItem>
     <DiashowItem>
         <iframe src="https://www.rejseplanen.dk/webapp/?#!p|tp!histid|0!histkey|h284185" style="height:100vh;width:100vw;"></iframe>
     </DiashowItem>
+<<<<<<< Updated upstream
     
 </Diashow>
+=======
+</Diashow>
+
+
+@code {
+    private MarkupString[]? staticHtmlContent;
+
+    protected override async Task OnInitializedAsync()
+    {
+        staticHtmlContent = new MarkupString[]
+        {
+            new(await Http.GetStringAsync("main.htm"))
+        };
+    }
+}
+>>>>>>> Stashed changes
