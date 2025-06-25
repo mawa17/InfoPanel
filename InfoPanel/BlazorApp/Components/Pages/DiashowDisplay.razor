@@ -1,11 +1,11 @@
 ﻿@rendermode InteractiveServer
 
-<Diashow IntervalMs="5000" DisplayProgressBar DisplayNavButtons FreezeOnHover>
-    @*
-    <DiashowItem>
+
+<Diashow IntervalMs="5000" DisplayProgressBar DisplayNavButtons FreezeOnHover >
+    <DiashowItem LightMode>
         <RejseplanWebsite.Pages.Index />
     </DiashowItem>
-    *@
+
 
     <DiashowItem>
         <InfoGuide Columns="@(
@@ -75,7 +75,7 @@
             })" />
     </DiashowItem>
     
-    @*
+    
     <DiashowItem>
         <img src="./keys.png" class="w-100 vh-100 object-fit-cover">
     </DiashowItem>
@@ -85,5 +85,5 @@
     <DiashowItem>
         <iframe src="https://www.rejseplanen.dk/webapp/?#!p|tp!histid|0!histkey|h284185" style="height:100vh;width:100vw;"></iframe>
     </DiashowItem>
-    *@
+    
 </Diashow>
