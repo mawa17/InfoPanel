@@ -1,8 +1,6 @@
-﻿@using System.Timers
-
-<CascadingValue Value="this">
+﻿<CascadingValue Value="this">
     <div class="diashow position-fixed top-0 start-0 vw-100 vh-100 overflow-hidden"
-         style="user-select: none; background-color:@(IsDarkMode ? "black" : "white")"
+         style="user-select: none; background-color: @(IsDarkMode ? "#000000" : "#ffffff"); color: @(IsDarkMode ? "#ffffff" : "#000000");"
          @onmouseenter="(FreezeOnHover ? OnMouseEnter : null)"
          @onmouseleave="(FreezeOnHover ? OnMouseLeave : null)">
 
@@ -10,8 +8,8 @@
 
         @if (Items.Count > 1)
         {
-            <div class="diashow-item h-100 d-flex justify-content-center align-items-center">
-                <div class="d-flex justify-content-center align-items-center flex-grow-1" style="width: 100%;">
+            <div class="diashow-item h-100 d-flex justify-content-center align-items-center text-center p-4 pb-5 overflow-auto">
+                <div class="w-100" style="padding: 0 7rem; max-height: 100%; overflow-y: auto;">
                     @Items[ItemIndex].ChildContent
                 </div>
             </div>
@@ -20,10 +18,10 @@
             {
                 <div class="position-fixed bottom-0 start-0 end-0"
                      style="height: 4px; z-index: 2147483647; pointer-events: none;">
-                    <div class="w-100 h-100 rounded-0 overflow-hidden" style="background-color: transparent;">
+                    <div class="w-100 h-100 rounded-0 overflow-hidden">
                         <div role="progressbar"
-                             class="h-100 rounded-0"
-                             style="width: @ProgressPercentage%; transition: width @(TickIntervalMs)ms linear; background-color:@(IsDarkMode ? "white" : "black")"
+                             class="h-100 rounded-0 @(IsDarkMode ? "bg-light" : "bg-dark")"
+                             style="width: @ProgressPercentage%; transition: width @(TickIntervalMs)ms linear;"
                              aria-valuemin="0" aria-valuemax="100" aria-valuenow="@ProgressPercentage">
                         </div>
                     </div>
@@ -34,11 +32,11 @@
             {
                 <div class="position-absolute top-50 start-0 end-0 d-flex justify-content-between px-3 translate-middle-y"
                      style="z-index: 2147483646;">
-                    <button class="btn rounded-circle opacity-75 shadow-sm btn-lg @(IsDarkMode ? "btn-outline-dark" : "btn-outline-light")"
+                    <button class="btn rounded-circle opacity-75 shadow-sm btn-lg @(IsDarkMode ? "btn-outline-light" : "btn-outline-dark")"
                             @onclick="Prev" style="width: 3.5rem; height: 3.5rem;">
                         &lt;
                     </button>
-                    <button class="btn rounded-circle opacity-75 shadow-sm btn-lg @(IsDarkMode ? "btn-outline-dark" : "btn-outline-light")"
+                    <button class="btn rounded-circle opacity-75 shadow-sm btn-lg @(IsDarkMode ? "btn-outline-light" : "btn-outline-dark")"
                             @onclick="Next" style="width: 3.5rem; height: 3.5rem;">
                         &gt;
                     </button>
@@ -47,8 +45,12 @@
         }
         else if (Items.Count == 1)
         {
-            <div class="diashow-item h-100 d-flex justify-content-center align-items-center">
-                @Items[0].ChildContent
+            <div class="diashow-content-container h-100 d-flex justify-content-center align-items-center"
+                 style="padding: 1rem; box-sizing: border-box;">
+
+                <div class="w-100 h-100 d-flex justify-content-center align-items-center" style="max-height: 100%; overflow: auto;">
+                    @Items[0].ChildContent
+                </div>
             </div>
         }
     </div>

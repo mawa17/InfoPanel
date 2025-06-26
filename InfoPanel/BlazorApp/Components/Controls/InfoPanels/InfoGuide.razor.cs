@@ -17,7 +17,12 @@ public sealed record Column
         Text = text;
     }
 
-    public int Width { get; set; }
+
+    public int Width 
+    {
+        get;
+        set => field = Math.Clamp(value, 1, 12);
+    }
     public string Title { get; set; } = string.Empty;
     public string Text { get; set; } = string.Empty;
 }

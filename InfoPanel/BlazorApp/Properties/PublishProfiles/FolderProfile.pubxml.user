@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- https://go.microsoft.com/fwlink/?LinkID=208121. -->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\maw\Desktop\InfoPanel\InfoPanel\BlazorApp\bin\Release\net9.0\publish\</_PublishTargetUrl>
+    <History>True|2025-06-26T07:32:12.2364089Z||;True|2025-06-25T13:05:20.4837356+02:00||;False|2025-06-25T09:22:01.0023701+02:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include=".env.local">
+      <publishTime>06/13/2025 09:40:19</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

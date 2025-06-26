@@ -1,13 +1,14 @@
-﻿@inject HttpClient Http
+﻿@using BlazorApp.Components.Controls.InfoPanels
+@inject IConfiguration Configuration
+@inject HttpClient Http
 @rendermode InteractiveServer
+@attribute [StreamRendering]
 
 
-<Diashow IntervalMs="5000" DisplayProgressBar DisplayNavButtons FreezeOnHover >
-    <DiashowItem LightMode>
+<Diashow IntervalMs="@(uint.TryParse(Configuration["CustomSettings:Diashow:IntervalMs"], out uint value) ? value : 2000)" DisplayProgressBar DisplayNavButtons FreezeOnHover>
+    <DiashowItem>
         <RejseplanWebsite.Pages.Index />
     </DiashowItem>
-
-
     <DiashowItem>
         <InfoGuide Columns="@(
             new List<Column>() {
@@ -75,11 +76,17 @@
                 }
             })" />
     </DiashowItem>
-    
-    
+
+@*     <DiashowItem>
+        <iframe src="https://gnist.show/" style="height:100vh;width:100vw;"></iframe>
+    </DiashowItem>
+    <DiashowItem>
+        <iframe src="https://www.rejseplanen.dk/webapp/?#!p|tp!histid|0!histkey|h284185" style="height:100vh;width:100vw;"></iframe>
+    </DiashowItem>
     <DiashowItem>
         <img src="./keys.png" class="w-100 vh-100 object-fit-cover">
-    </DiashowItem>
+    </DiashowItem> *@
+
     @if (staticHtmlContent is default(MarkupString[]))
     {
         <p>Loading...</p>
@@ -91,17 +98,8 @@
             <DiashowItem>@htmlContent</DiashowItem>
         }
     }
-    <DiashowItem>
-        <iframe src="https://gnist.show/" style="height:100vh;width:100vw;"></iframe>
-    </DiashowItem>
-    <DiashowItem>
-        <iframe src="https://www.rejseplanen.dk/webapp/?#!p|tp!histid|0!histkey|h284185" style="height:100vh;width:100vw;"></iframe>
-    </DiashowItem>
-<<<<<<< Updated upstream
-    
 </Diashow>
-=======
-</Diashow>
+
 
 
 @code {
@@ -111,8 +109,7 @@
     {
         staticHtmlContent = new MarkupString[]
         {
-            new(await Http.GetStringAsync("main.htm"))
+            new(await Http.GetStringAsync("InfoPanels/GitHubInfo/main.html"))
         };
     }
 }
->>>>>>> Stashed changes
