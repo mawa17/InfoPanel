@@ -1,21 +1,41 @@
-﻿div.info-column {
+﻿@keyframes borderSpin {
+    from {
+        --angle: 0deg;
+    }
+
+    to {
+        --angle: 360deg;
+    }
+}
+
+@property --angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+
+div.info-column {
     position: relative;
     border-radius: 0.5rem;
     padding: 1.5rem 3rem;
-    background-color: #10101080;
+    background-color: #101010cc;
     overflow: hidden;
+    z-index: 0;
 }
 
-div.info-column::before {
-    content: '';
+.info-column::before {
+    content: "";
     position: absolute;
     inset: 0;
-    padding: 0.1rem;
-    background: linear-gradient(135deg, #2e8b5780, #00699480);
+    padding: 1rem;
     border-radius: inherit;
+    background: conic-gradient(from var(--angle), #2e8b57 0%, #006994 25%, #006994 50%, #006994 75%, #2e8b57 100%);
+    animation: borderSpin 10s linear infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
+    background-size: cover;
+    z-index: -1;
 }
 
 div.info-column-title {
