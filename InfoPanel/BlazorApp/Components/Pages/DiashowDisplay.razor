@@ -6,7 +6,7 @@
         <RejseplanWebsite.Pages.Index />
     </DiashowItem>
     *@
-
+    
     <DiashowItem>
         <InfoGuide Columns="@(
             new List<Column>() {
@@ -67,13 +67,33 @@
                     Width = 5,
                     Title = "Studieadministrationen",
                     Text = 
-                        @"Du kan kontakte studieadministrationen på mail
+                        @"Du kan kontakte studieadministrationen på:
                         <table class='w-75'>
                             <tbody>
                                 <tr><td>Telefon</td><td>+45 38 17 70 00</td></tr>
                                 <tr><td>Email</td><td><a href='sikkerpost.sop@tec.dk'>sikkerpost.sop@tec.dk</a></td></tr>
                             </tbody>
                         </table>"
+                }
+            })" />
+    </DiashowItem>
+
+    <DiashowItem>
+        <InfoGuide Columns="@(
+            new List<Column>() {
+                new Column {
+                    Width = 6,
+                    Title = "Sommerafslutning",
+                    Text =
+                        @"Skolen holder sommerafslutning d. 00/00.
+                          <br />
+                          Håber vi får dig at se."
+                },
+                new Column {
+                    Width = 6,
+                    Title = "Karrieredag",
+                    Text =
+                        @"Der er karrieredag d. 00/00, inde i øksenhallen i digitalbyen."
                 }
             })" />
     </DiashowItem>
