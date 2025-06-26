@@ -1,5 +1,3 @@
-using BlazorApp.Components;
-using Microsoft.AspNetCore.Components;
 using RejseplanWebsite;
 
 var builder = WebApplication.CreateBuilder(args);
