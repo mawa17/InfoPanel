@@ -132,7 +132,8 @@
     {
         staticHtmlContent = new MarkupString[]
         {
-            new(await Http.GetStringAsync("InfoPanels/GitHubInfo/main.html"))
+            new(await Http.GetStringAsync("InfoPanels/GitHubInfo/main.html")),
+            new(await Http.GetStringAsync("InfoPanels/OfficeInfo/index.html"))
         };
     }
 }
